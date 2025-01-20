@@ -7,8 +7,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/owlto-dao/utils-go/alert"
-	"github.com/owlto-dao/utils-go/util"
+	"github.com/realcaishen/utils-go/alert"
+	"github.com/realcaishen/utils-go/util"
 )
 
 type Dtc struct {

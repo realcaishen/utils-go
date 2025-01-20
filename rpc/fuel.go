@@ -8,8 +8,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/machinebox/graphql"
-	"github.com/owlto-dao/utils-go/loader"
-	"github.com/owlto-dao/utils-go/util"
+	"github.com/realcaishen/utils-go/loader"
+	"github.com/realcaishen/utils-go/util"
 	"github.com/sentioxyz/fuel-go"
 	"github.com/sentioxyz/fuel-go/types"
 )

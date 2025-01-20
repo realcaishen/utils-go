@@ -10,8 +10,8 @@ import (
 	"github.com/block-vision/sui-go-sdk/models"
 	"github.com/block-vision/sui-go-sdk/sui"
 	_ "github.com/gagliardetto/solana-go"
-	"github.com/owlto-dao/utils-go/loader"
-	"github.com/owlto-dao/utils-go/util"
+	"github.com/realcaishen/utils-go/loader"
+	"github.com/realcaishen/utils-go/util"
 )
 
 type SuiRpc struct {

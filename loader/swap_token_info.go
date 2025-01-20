@@ -3,13 +3,13 @@ package loader
 import (
 	"database/sql"
 	"fmt"
-	"github.com/owlto-dao/utils-go/asynccache"
-	"github.com/owlto-dao/utils-go/log"
+	"github.com/realcaishen/utils-go/asynccache"
+	"github.com/realcaishen/utils-go/log"
 	"strings"
 	"sync"
 	"time"
 
-	"github.com/owlto-dao/utils-go/alert"
+	"github.com/realcaishen/utils-go/alert"
 )
 
 type SwapTokenInfoManager struct {

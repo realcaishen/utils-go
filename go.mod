@@ -1,4 +1,4 @@
-module github.com/owlto-dao/utils-go
+module github.com/realcaishen/utils-go
 
 go 1.23.1
 

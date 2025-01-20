@@ -10,9 +10,9 @@ import (
 	"github.com/NethermindEth/starknet.go/rpc"
 	"github.com/NethermindEth/starknet.go/utils"
 	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/owlto-dao/utils-go/loader"
-	"github.com/owlto-dao/utils-go/log"
-	"github.com/owlto-dao/utils-go/util"
+	"github.com/realcaishen/utils-go/loader"
+	"github.com/realcaishen/utils-go/log"
+	"github.com/realcaishen/utils-go/util"
 )
 
 type StarknetRpc struct {

@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	_ "github.com/gagliardetto/solana-go"
-	"github.com/owlto-dao/utils-go/loader"
-	"github.com/owlto-dao/utils-go/network"
-	"github.com/owlto-dao/utils-go/util"
+	"github.com/realcaishen/utils-go/loader"
+	"github.com/realcaishen/utils-go/network"
+	"github.com/realcaishen/utils-go/util"
 )
 
 type BenfenRpc struct {

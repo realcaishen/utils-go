@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/go-lark/lark"
-	"github.com/owlto-dao/utils-go/convert"
+	"github.com/realcaishen/utils-go/convert"
 )
 
 var LarkBot *Bot

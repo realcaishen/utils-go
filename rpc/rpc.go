@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/owlto-dao/utils-go/apollosdk"
-	"github.com/owlto-dao/utils-go/loader"
+	"github.com/realcaishen/utils-go/apollosdk"
+	"github.com/realcaishen/utils-go/loader"
 )
 
 type Rpc interface {

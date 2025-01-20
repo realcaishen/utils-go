@@ -5,7 +5,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/owlto-dao/utils-go/alert"
+	"github.com/realcaishen/utils-go/alert"
 )
 
 type ChannelCommissionRatio struct {

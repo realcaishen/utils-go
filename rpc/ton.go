@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/owlto-dao/utils-go/loader"
-	"github.com/owlto-dao/utils-go/util"
+	"github.com/realcaishen/utils-go/loader"
+	"github.com/realcaishen/utils-go/util"
 	"github.com/xssnick/tonutils-go/address"
 	"github.com/xssnick/tonutils-go/liteclient"
 	"github.com/xssnick/tonutils-go/ton"
