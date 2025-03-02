@@ -20,6 +20,7 @@ import (
 	"github.com/realcaishen/utils-go/owlconsts"
 	"github.com/realcaishen/utils-go/pointer"
 	"github.com/realcaishen/utils-go/util"
+	"github.com/shopspring/decimal"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -66,8 +67,7 @@ func (w *EvmRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 			TokenAddress: tokenAddr,
 			Decimals:     w.chainInfo.GasTokenDecimal,
 			FullName:     w.chainInfo.AliasName,
-			TotalSupply:  big.NewInt(0),
-			Url:          w.chainInfo.ExplorerUrl,
+			TotalSupply:  decimal.Zero,
 		}, nil
 	}
 	tokenInfo, ok := w.tokenInfoMgr.GetByChainNameTokenAddr(w.chainInfo.Name, tokenAddr)
@@ -171,7 +171,7 @@ func (w *EvmRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 		TokenAddress: tokenAddr,
 		Decimals:     int32(decimals.Uint64()),
 		FullName:     string(name),
-		TotalSupply:  totalSupply,
+		TotalSupply:  decimal.NewFromBigInt(totalSupply, 0),
 	}
 	w.tokenInfoMgr.AddTokenInfo(ti)
 	return ti, nil

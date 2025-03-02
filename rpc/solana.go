@@ -18,6 +18,7 @@ import (
 	"github.com/realcaishen/utils-go/log"
 	sol "github.com/realcaishen/utils-go/txn/solana"
 	"github.com/realcaishen/utils-go/util"
+	"github.com/shopspring/decimal"
 )
 
 type MetaData struct {
@@ -103,8 +104,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 			TokenAddress: tokenAddr,
 			Decimals:     9,
 			FullName:     "Solana",
-			TotalSupply:  big.NewInt(0),
-			Url:          "https://solana.com",
+			TotalSupply:  decimal.Zero,
 		}, nil
 	}
 	tokenInfo, ok := w.tokenInfoMgr.GetByChainNameTokenAddr(w.chainInfo.Name, tokenAddr)
@@ -124,7 +124,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 
 	symbol := "UNKNOWN"
 	fullName := "UNKNOWN"
-	uri := ""
+	//uri := ""
 	rsp, err := w.GetAccountInfo(
 		ctx,
 		metapk,
@@ -136,7 +136,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 		}
 		symbol = meta.Data.Symbol
 		fullName = meta.Data.Name
-		uri = meta.Data.Uri
+		//uri = meta.Data.Uri
 	} else if err != rpc.ErrNotFound {
 		return nil, err
 	}
@@ -162,7 +162,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 		if err == nil {
 			symbol = metadata.Symbol
 			fullName = metadata.Name
-			uri = metadata.Uri
+			//uri = metadata.Uri
 		}
 	}
 
@@ -172,8 +172,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 		TokenAddress: tokenAddr,
 		Decimals:     int32(mintAccount.Decimals),
 		FullName:     fullName,
-		TotalSupply:  big.NewInt(0).SetUint64(mintAccount.Supply),
-		Url:          uri,
+		TotalSupply:  decimal.NewFromUint64(mintAccount.Supply),
 	}
 	w.tokenInfoMgr.AddTokenInfo(token)
 	return token, nil

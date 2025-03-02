@@ -12,6 +12,7 @@ import (
 	_ "github.com/gagliardetto/solana-go"
 	"github.com/realcaishen/utils-go/loader"
 	"github.com/realcaishen/utils-go/util"
+	"github.com/shopspring/decimal"
 )
 
 type SuiRpc struct {
@@ -55,7 +56,7 @@ func (w *SuiRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 			Decimals:     int32(data["decimals"].(float64)),
 			FullName:     data["name"].(string),
 			Icon:         data["iconUrl"].(string),
-			TotalSupply:  big.NewInt(1000000000),
+			TotalSupply:  decimal.NewFromUint64(1000000000),
 		}, nil
 	}
 
@@ -91,7 +92,7 @@ func (w *SuiRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 	if err == nil {
 		totalSupply, ok := big.NewInt(0).SetString(trsp.Value, 0)
 		if ok {
-			ti.TotalSupply = totalSupply
+			ti.TotalSupply = decimal.NewFromBigInt(totalSupply, 0)
 		}
 	}
 

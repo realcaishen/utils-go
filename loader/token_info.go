@@ -1,23 +1,50 @@
+// CREATE TABLE `t_token_info` (
+// 	`id` bigint NOT NULL AUTO_INCREMENT,
+// 	`token_name` varchar(128) NOT NULL,
+// 	`chain_name` varchar(64) NOT NULL,
+// 	`token_address` varchar(128) NOT NULL,
+// 	`decimals` int NOT NULL,
+// 	`full_name` varchar(128) NOT NULL DEFAULT '',
+// 	`total_supply` DECIMAL(64, 0) NOT NULL DEFAULT 0,
+// 	`current_supply` DECIMAL(64, 0) NOT NULL DEFAULT 0,
+//  `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+// 	`icon` varchar(1024) NOT NULL DEFAULT '',
+// 	PRIMARY KEY (`id`),
+// 	UNIQUE KEY `idx_chain_name_token_address` (`chain_name`,`token_address`),
+// 	KEY `idx_token_name` (`token_name`)
+//   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
 package loader
 
 import (
 	"database/sql"
-	"math/big"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/realcaishen/utils-go/alert"
+	"github.com/realcaishen/utils-go/log"
+	"github.com/shopspring/decimal"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type TokenInfo struct {
-	TokenName    string
-	ChainName    string
-	TokenAddress string
-	Decimals     int32
-	FullName     string
-	TotalSupply  *big.Int
-	Icon         string
-	Url          string
+	ID            int64           `gorm:"column:id;primary_key;AUTO_INCREMENT"` // matches `id` column
+	TokenName     string          `gorm:"column:token_name;NOT NULL"`
+	ChainName     string          `gorm:"column:chain_name;NOT NULL"`
+	TokenAddress  string          `gorm:"column:token_address;NOT NULL"`
+	Decimals      int32           `gorm:"column:decimals;NOT NULL"`
+	FullName      string          `gorm:"column:full_name;NOT NULL"`
+	TotalSupply   decimal.Decimal `gorm:"column:total_supply;type:DECIMAL(64,0);NOT NULL"`
+	CurrentSupply decimal.Decimal `gorm:"column:current_supply;type:DECIMAL(64,0);NOT NULL"`
+	Creation      time.Time       `gorm:"column:creation;default:CURRENT_TIMESTAMP;NOT NULL"`
+	Icon          string          `gorm:"column:icon;NOT NULL"`
+}
+
+func (m *TokenInfo) TableName() string {
+	return "t_token_info"
 }
 
 type TokenInfoManager struct {
@@ -25,18 +52,39 @@ type TokenInfoManager struct {
 	chainNameTokenNames map[string]map[string]*TokenInfo
 	allTokens           []*TokenInfo
 	db                  *sql.DB
+	gdb                 *gorm.DB
 	alerter             alert.Alerter
 	mutex               *sync.RWMutex
 }
 
 func NewTokenInfoManager(db *sql.DB, alerter alert.Alerter) *TokenInfoManager {
+
+	gdb, err := gorm.Open(mysql.New(mysql.Config{
+		Conn: db,
+	}), &gorm.Config{})
+
+	if err != nil {
+		log.Fatal("Failed to initialize GORM:", err)
+	}
 	return &TokenInfoManager{
 		chainNameTokenAddrs: make(map[string]map[string]*TokenInfo),
 		chainNameTokenNames: make(map[string]map[string]*TokenInfo),
 		db:                  db,
+		gdb:                 gdb,
 		alerter:             alerter,
 		mutex:               &sync.RWMutex{},
 	}
+}
+
+func (mgr *TokenInfoManager) GetFromDb(chainName string, tokenAddress string) (*TokenInfo, error) {
+	var row TokenInfo
+	result := mgr.gdb.Where("chain_name =? AND token_address = ?", chainName, tokenAddress).First(&row)
+	return &row, result.Error
+}
+
+func (mgr *TokenInfoManager) InsertToDb(row *TokenInfo) error {
+	result := mgr.gdb.Clauses(clause.Insert{Modifier: "IGNORE"}).Create(row)
+	return result.Error
 }
 
 func (mgr *TokenInfoManager) GetByChainNameTokenAddr(chainName string, tokenAddr string) (*TokenInfo, bool) {
