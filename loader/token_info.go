@@ -6,7 +6,6 @@
 // 	`decimals` int NOT NULL,
 // 	`full_name` varchar(128) NOT NULL DEFAULT '',
 // 	`total_supply` DECIMAL(64, 0) NOT NULL DEFAULT 0,
-// 	`current_supply` DECIMAL(64, 0) NOT NULL DEFAULT 0,
 //  `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 // 	`icon` varchar(1024) NOT NULL DEFAULT '',
 // 	PRIMARY KEY (`id`),
@@ -31,16 +30,15 @@ import (
 )
 
 type TokenInfo struct {
-	ID            int64           `gorm:"column:id;primary_key;AUTO_INCREMENT"` // matches `id` column
-	TokenName     string          `gorm:"column:token_name;NOT NULL"`
-	ChainName     string          `gorm:"column:chain_name;NOT NULL"`
-	TokenAddress  string          `gorm:"column:token_address;NOT NULL"`
-	Decimals      int32           `gorm:"column:decimals;NOT NULL"`
-	FullName      string          `gorm:"column:full_name;NOT NULL"`
-	TotalSupply   decimal.Decimal `gorm:"column:total_supply;type:DECIMAL(64,0);NOT NULL"`
-	CurrentSupply decimal.Decimal `gorm:"column:current_supply;type:DECIMAL(64,0);NOT NULL"`
-	Creation      time.Time       `gorm:"column:creation;default:CURRENT_TIMESTAMP;NOT NULL"`
-	Icon          string          `gorm:"column:icon;NOT NULL"`
+	ID           int64           `gorm:"column:id;primary_key;AUTO_INCREMENT"` // matches `id` column
+	TokenName    string          `gorm:"column:token_name;NOT NULL"`
+	ChainName    string          `gorm:"column:chain_name;NOT NULL"`
+	TokenAddress string          `gorm:"column:token_address;NOT NULL"`
+	Decimals     int32           `gorm:"column:decimals;NOT NULL"`
+	FullName     string          `gorm:"column:full_name;NOT NULL"`
+	TotalSupply  decimal.Decimal `gorm:"column:total_supply;type:DECIMAL(64,0);NOT NULL"`
+	Creation     time.Time       `gorm:"column:creation;default:CURRENT_TIMESTAMP;NOT NULL"`
+	Icon         string          `gorm:"column:icon;NOT NULL"`
 }
 
 func (m *TokenInfo) TableName() string {
