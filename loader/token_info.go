@@ -1,12 +1,14 @@
 // CREATE TABLE `t_token_info` (
 // 	`id` bigint NOT NULL AUTO_INCREMENT,
+//  `update_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+//  `insert_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 // 	`token_name` varchar(128) NOT NULL,
 // 	`chain_name` varchar(64) NOT NULL,
 // 	`token_address` varchar(128) NOT NULL,
 // 	`decimals` int NOT NULL,
 // 	`full_name` varchar(128) NOT NULL DEFAULT '',
 // 	`total_supply` DECIMAL(64, 0) NOT NULL DEFAULT 0,
-//  `creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//  `discover_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 // 	`icon` varchar(1024) NOT NULL DEFAULT '',
 // 	PRIMARY KEY (`id`),
 // 	UNIQUE KEY `idx_chain_name_token_address` (`chain_name`,`token_address`),
@@ -31,13 +33,15 @@ import (
 
 type TokenInfo struct {
 	ID           int64           `gorm:"column:id;primary_key;AUTO_INCREMENT"` // matches `id` column
+	InsertTime   time.Time       `gorm:"column:insert_timestamp;default:CURRENT_TIMESTAMP;NOT NULL"`
+	UpdateTime   time.Time       `gorm:"column:update_timestamp;default:CURRENT_TIMESTAMP;NOT NULL"`
 	TokenName    string          `gorm:"column:token_name;NOT NULL"`
 	ChainName    string          `gorm:"column:chain_name;NOT NULL"`
 	TokenAddress string          `gorm:"column:token_address;NOT NULL"`
 	Decimals     int32           `gorm:"column:decimals;NOT NULL"`
 	FullName     string          `gorm:"column:full_name;NOT NULL"`
 	TotalSupply  decimal.Decimal `gorm:"column:total_supply;type:DECIMAL(64,0);NOT NULL"`
-	Creation     time.Time       `gorm:"column:creation;default:CURRENT_TIMESTAMP;NOT NULL"`
+	DiscoverTime time.Time       `gorm:"column:discover_timestamp;default:CURRENT_TIMESTAMP;NOT NULL"`
 	Icon         string          `gorm:"column:icon;NOT NULL"`
 }
 
