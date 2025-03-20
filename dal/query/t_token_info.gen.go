@@ -41,8 +41,8 @@ func newTTokenInfo(db *gorm.DB, opts ...gen.DOOption) tTokenInfo {
 	_tTokenInfo.Mcap = field.NewFloat64(tableName, "mcap")
 	_tTokenInfo.Fdv = field.NewFloat64(tableName, "fdv")
 	_tTokenInfo.Volume24h = field.NewFloat64(tableName, "volume24h")
-	_tTokenInfo.Price24h = field.NewFloat64(tableName, "price24h")
-	_tTokenInfo.Price6h = field.NewFloat64(tableName, "price6h")
+	_tTokenInfo.Pricechg24h = field.NewFloat64(tableName, "pricechg24h")
+	_tTokenInfo.Pricechg6h = field.NewFloat64(tableName, "pricechg6h")
 
 	_tTokenInfo.fillFieldMap()
 
@@ -67,8 +67,8 @@ type tTokenInfo struct {
 	Mcap              field.Float64
 	Fdv               field.Float64
 	Volume24h         field.Float64
-	Price24h          field.Float64
-	Price6h           field.Float64
+	Pricechg24h       field.Float64
+	Pricechg6h        field.Float64
 
 	fieldMap map[string]field.Expr
 }
@@ -99,8 +99,8 @@ func (t *tTokenInfo) updateTableName(table string) *tTokenInfo {
 	t.Mcap = field.NewFloat64(table, "mcap")
 	t.Fdv = field.NewFloat64(table, "fdv")
 	t.Volume24h = field.NewFloat64(table, "volume24h")
-	t.Price24h = field.NewFloat64(table, "price24h")
-	t.Price6h = field.NewFloat64(table, "price6h")
+	t.Pricechg24h = field.NewFloat64(table, "pricechg24h")
+	t.Pricechg6h = field.NewFloat64(table, "pricechg6h")
 
 	t.fillFieldMap()
 
@@ -142,8 +142,8 @@ func (t *tTokenInfo) fillFieldMap() {
 	t.fieldMap["mcap"] = t.Mcap
 	t.fieldMap["fdv"] = t.Fdv
 	t.fieldMap["volume24h"] = t.Volume24h
-	t.fieldMap["price24h"] = t.Price24h
-	t.fieldMap["price6h"] = t.Price6h
+	t.fieldMap["pricechg24h"] = t.Pricechg24h
+	t.fieldMap["pricechg6h"] = t.Pricechg6h
 }
 
 func (t tTokenInfo) clone(db *gorm.DB) tTokenInfo {

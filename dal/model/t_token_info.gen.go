@@ -28,8 +28,8 @@ type TTokenInfo struct {
 	Mcap              float64         `gorm:"column:mcap;not null" json:"mcap"`
 	Fdv               float64         `gorm:"column:fdv;not null" json:"fdv"`
 	Volume24h         float64         `gorm:"column:volume24h;not null" json:"volume24h"`
-	Price24h          float64         `gorm:"column:price24h;not null" json:"price24h"`
-	Price6h           float64         `gorm:"column:price6h;not null" json:"price6h"`
+	Pricechg24h       float64         `gorm:"column:pricechg24h;not null" json:"pricechg24h"`
+	Pricechg6h        float64         `gorm:"column:pricechg6h;not null" json:"pricechg6h"`
 }
 
 // TableName TTokenInfo's table name
