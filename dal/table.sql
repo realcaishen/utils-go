@@ -17,7 +17,8 @@ CREATE TABLE `t_token_info` (
     `price6h` DOUBLE NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_chain_name_token_address` (`chain_name`, `token_address`),
-    KEY `idx_token_name` (`token_name`)
+    KEY `idx_token_name` (`token_name`),
+    KEY `idx_insert_timestamp` (`insert_timestamp`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE `t_tag` (
