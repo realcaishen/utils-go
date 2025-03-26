@@ -25,6 +25,10 @@ type TTokenInfo struct {
 	TotalSupply       decimal.Decimal `gorm:"column:total_supply;not null;default:0" json:"total_supply"`
 	DiscoverTimestamp time.Time       `gorm:"column:discover_timestamp;not null;default:CURRENT_TIMESTAMP" json:"discover_timestamp"`
 	Icon              string          `gorm:"column:icon;not null" json:"icon"`
+	Twitter           string          `gorm:"column:twitter;not null" json:"twitter"`
+	Telegram          string          `gorm:"column:telegram;not null" json:"telegram"`
+	Website           string          `gorm:"column:website;not null" json:"website"`
+	Discord           string          `gorm:"column:discord;not null" json:"discord"`
 	Mcap              float64         `gorm:"column:mcap;not null" json:"mcap"`
 	Fdv               float64         `gorm:"column:fdv;not null" json:"fdv"`
 	Volume24h         float64         `gorm:"column:volume24h;not null" json:"volume24h"`

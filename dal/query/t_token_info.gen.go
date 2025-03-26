@@ -38,6 +38,10 @@ func newTTokenInfo(db *gorm.DB, opts ...gen.DOOption) tTokenInfo {
 	_tTokenInfo.TotalSupply = field.NewField(tableName, "total_supply")
 	_tTokenInfo.DiscoverTimestamp = field.NewTime(tableName, "discover_timestamp")
 	_tTokenInfo.Icon = field.NewString(tableName, "icon")
+	_tTokenInfo.Twitter = field.NewString(tableName, "twitter")
+	_tTokenInfo.Telegram = field.NewString(tableName, "telegram")
+	_tTokenInfo.Website = field.NewString(tableName, "website")
+	_tTokenInfo.Discord = field.NewString(tableName, "discord")
 	_tTokenInfo.Mcap = field.NewFloat64(tableName, "mcap")
 	_tTokenInfo.Fdv = field.NewFloat64(tableName, "fdv")
 	_tTokenInfo.Volume24h = field.NewFloat64(tableName, "volume24h")
@@ -64,6 +68,10 @@ type tTokenInfo struct {
 	TotalSupply       field.Field
 	DiscoverTimestamp field.Time
 	Icon              field.String
+	Twitter           field.String
+	Telegram          field.String
+	Website           field.String
+	Discord           field.String
 	Mcap              field.Float64
 	Fdv               field.Float64
 	Volume24h         field.Float64
@@ -96,6 +104,10 @@ func (t *tTokenInfo) updateTableName(table string) *tTokenInfo {
 	t.TotalSupply = field.NewField(table, "total_supply")
 	t.DiscoverTimestamp = field.NewTime(table, "discover_timestamp")
 	t.Icon = field.NewString(table, "icon")
+	t.Twitter = field.NewString(table, "twitter")
+	t.Telegram = field.NewString(table, "telegram")
+	t.Website = field.NewString(table, "website")
+	t.Discord = field.NewString(table, "discord")
 	t.Mcap = field.NewFloat64(table, "mcap")
 	t.Fdv = field.NewFloat64(table, "fdv")
 	t.Volume24h = field.NewFloat64(table, "volume24h")
@@ -127,7 +139,7 @@ func (t *tTokenInfo) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (t *tTokenInfo) fillFieldMap() {
-	t.fieldMap = make(map[string]field.Expr, 16)
+	t.fieldMap = make(map[string]field.Expr, 20)
 	t.fieldMap["id"] = t.ID
 	t.fieldMap["update_timestamp"] = t.UpdateTimestamp
 	t.fieldMap["insert_timestamp"] = t.InsertTimestamp
@@ -139,6 +151,10 @@ func (t *tTokenInfo) fillFieldMap() {
 	t.fieldMap["total_supply"] = t.TotalSupply
 	t.fieldMap["discover_timestamp"] = t.DiscoverTimestamp
 	t.fieldMap["icon"] = t.Icon
+	t.fieldMap["twitter"] = t.Twitter
+	t.fieldMap["telegram"] = t.Telegram
+	t.fieldMap["website"] = t.Website
+	t.fieldMap["discord"] = t.Discord
 	t.fieldMap["mcap"] = t.Mcap
 	t.fieldMap["fdv"] = t.Fdv
 	t.fieldMap["volume24h"] = t.Volume24h
