@@ -12,6 +12,7 @@ import (
 
 type TokenDetail struct {
 	ChainName         string      `json:"chain_name"`
+	Icon              string      `json:"icon"`
 	Address           string      `json:"address"`
 	CirculatingSupply string      `json:"circulating_supply"`
 	TotalSupply       string      `json:"total_supply"`
