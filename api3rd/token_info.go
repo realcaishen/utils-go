@@ -25,12 +25,51 @@ type TokenDetail struct {
 	Decimals          int         `json:"decimals"`
 	Price             float64     `json:"price"`
 	Liquidity         float64     `json:"liquidity"`
-	Volume24h         float64     `json:"volume24h"`
-	Pricechg24h       float64     `json:"pricechg24h"`
-	Pricechg6h        float64     `json:"pricechg6h"`
 	CreationTime      string      `json:"creation_time"`
+	Volume            ValueChg    `json:"volume"`
+	PriceChg          ValueChg    `json:"pricechg"`
 	SocialInfos       SocialInfos `json:"social_infos"`
 	TopHolders        TopHolders  `json:"top_holders"`
+}
+
+type ValueChg struct {
+	H24 float64 `json:"h24"`
+	H6  float64 `json:"h6"`
+	H1  float64 `json:"h1"`
+	M5  float64 `json:"m5"`
+}
+
+type SocialInfos struct {
+	Email     string `json:"email"`
+	Bitbucket string `json:"bitbucket"`
+	Discord   string `json:"discord"`
+	Facebook  string `json:"facebook"`
+	Github    string `json:"github"`
+	Instagram string `json:"instagram"`
+	Linkedin  string `json:"linkedin"`
+	Medium    string `json:"medium"`
+	Reddit    string `json:"reddit"`
+	Telegram  string `json:"telegram"`
+	Tiktok    string `json:"tiktok"`
+	Twitter   string `json:"twitter"`
+	Website   string `json:"website"`
+	Youtube   string `json:"youtube"`
+}
+
+type TopHolders struct {
+	Items []*TopHolderItem `json:"items"`
+}
+type TopHolderItem struct {
+	Amount       decimal.Decimal `json:"amount"`
+	Decimals     int32           `json:"decimals"`
+	Mint         string          `json:"mint"`
+	Owner        string          `json:"owner"`
+	TokenAccount string          `json:"token_account"`
+	UiAmount     decimal.Decimal `json:"ui_amount"`
+}
+
+type TokenDetails struct {
+	Infos map[string]TokenDetail `json:"infos"`
 }
 
 func (item *TokenDetail) FillMcapFdv() {
@@ -68,39 +107,6 @@ func (item *TokenDetail) FillMcapFdv() {
 	if item.Fdv <= 0 {
 		item.Fdv = 0
 	}
-}
-
-type SocialInfos struct {
-	Email     string `json:"email"`
-	Bitbucket string `json:"bitbucket"`
-	Discord   string `json:"discord"`
-	Facebook  string `json:"facebook"`
-	Github    string `json:"github"`
-	Instagram string `json:"instagram"`
-	Linkedin  string `json:"linkedin"`
-	Medium    string `json:"medium"`
-	Reddit    string `json:"reddit"`
-	Telegram  string `json:"telegram"`
-	Tiktok    string `json:"tiktok"`
-	Twitter   string `json:"twitter"`
-	Website   string `json:"website"`
-	Youtube   string `json:"youtube"`
-}
-
-type TopHolders struct {
-	Items []*TopHolderItem `json:"items"`
-}
-type TopHolderItem struct {
-	Amount       decimal.Decimal `json:"amount"`
-	Decimals     int32           `json:"decimals"`
-	Mint         string          `json:"mint"`
-	Owner        string          `json:"owner"`
-	TokenAccount string          `json:"token_account"`
-	UiAmount     decimal.Decimal `json:"ui_amount"`
-}
-
-type TokenDetails struct {
-	Infos map[string]TokenDetail `json:"infos"`
 }
 
 func GetTokenDetails(ctx context.Context, serverUrl, chainName string, addresses []string, audit bool, detail bool, price bool, pool bool) (map[string]TokenDetail, error) {
