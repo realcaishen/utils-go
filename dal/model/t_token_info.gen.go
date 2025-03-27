@@ -32,8 +32,13 @@ type TTokenInfo struct {
 	Mcap              float64         `gorm:"column:mcap;not null" json:"mcap"`
 	Fdv               float64         `gorm:"column:fdv;not null" json:"fdv"`
 	Volume24h         float64         `gorm:"column:volume24h;not null" json:"volume24h"`
+	Volume6h          float64         `gorm:"column:volume6h;not null" json:"volume6h"`
+	Volume1h          float64         `gorm:"column:volume1h;not null" json:"volume1h"`
+	Volume5m          float64         `gorm:"column:volume5m;not null" json:"volume5m"`
 	Pricechg24h       float64         `gorm:"column:pricechg24h;not null" json:"pricechg24h"`
 	Pricechg6h        float64         `gorm:"column:pricechg6h;not null" json:"pricechg6h"`
+	Pricechg1h        float64         `gorm:"column:pricechg1h;not null" json:"pricechg1h"`
+	Pricechg5m        float64         `gorm:"column:pricechg5m;not null" json:"pricechg5m"`
 }
 
 // TableName TTokenInfo's table name

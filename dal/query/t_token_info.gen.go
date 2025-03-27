@@ -45,8 +45,13 @@ func newTTokenInfo(db *gorm.DB, opts ...gen.DOOption) tTokenInfo {
 	_tTokenInfo.Mcap = field.NewFloat64(tableName, "mcap")
 	_tTokenInfo.Fdv = field.NewFloat64(tableName, "fdv")
 	_tTokenInfo.Volume24h = field.NewFloat64(tableName, "volume24h")
+	_tTokenInfo.Volume6h = field.NewFloat64(tableName, "volume6h")
+	_tTokenInfo.Volume1h = field.NewFloat64(tableName, "volume1h")
+	_tTokenInfo.Volume5m = field.NewFloat64(tableName, "volume5m")
 	_tTokenInfo.Pricechg24h = field.NewFloat64(tableName, "pricechg24h")
 	_tTokenInfo.Pricechg6h = field.NewFloat64(tableName, "pricechg6h")
+	_tTokenInfo.Pricechg1h = field.NewFloat64(tableName, "pricechg1h")
+	_tTokenInfo.Pricechg5m = field.NewFloat64(tableName, "pricechg5m")
 
 	_tTokenInfo.fillFieldMap()
 
@@ -75,8 +80,13 @@ type tTokenInfo struct {
 	Mcap              field.Float64
 	Fdv               field.Float64
 	Volume24h         field.Float64
+	Volume6h          field.Float64
+	Volume1h          field.Float64
+	Volume5m          field.Float64
 	Pricechg24h       field.Float64
 	Pricechg6h        field.Float64
+	Pricechg1h        field.Float64
+	Pricechg5m        field.Float64
 
 	fieldMap map[string]field.Expr
 }
@@ -111,8 +121,13 @@ func (t *tTokenInfo) updateTableName(table string) *tTokenInfo {
 	t.Mcap = field.NewFloat64(table, "mcap")
 	t.Fdv = field.NewFloat64(table, "fdv")
 	t.Volume24h = field.NewFloat64(table, "volume24h")
+	t.Volume6h = field.NewFloat64(table, "volume6h")
+	t.Volume1h = field.NewFloat64(table, "volume1h")
+	t.Volume5m = field.NewFloat64(table, "volume5m")
 	t.Pricechg24h = field.NewFloat64(table, "pricechg24h")
 	t.Pricechg6h = field.NewFloat64(table, "pricechg6h")
+	t.Pricechg1h = field.NewFloat64(table, "pricechg1h")
+	t.Pricechg5m = field.NewFloat64(table, "pricechg5m")
 
 	t.fillFieldMap()
 
@@ -139,7 +154,7 @@ func (t *tTokenInfo) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (t *tTokenInfo) fillFieldMap() {
-	t.fieldMap = make(map[string]field.Expr, 20)
+	t.fieldMap = make(map[string]field.Expr, 25)
 	t.fieldMap["id"] = t.ID
 	t.fieldMap["update_timestamp"] = t.UpdateTimestamp
 	t.fieldMap["insert_timestamp"] = t.InsertTimestamp
@@ -158,8 +173,13 @@ func (t *tTokenInfo) fillFieldMap() {
 	t.fieldMap["mcap"] = t.Mcap
 	t.fieldMap["fdv"] = t.Fdv
 	t.fieldMap["volume24h"] = t.Volume24h
+	t.fieldMap["volume6h"] = t.Volume6h
+	t.fieldMap["volume1h"] = t.Volume1h
+	t.fieldMap["volume5m"] = t.Volume5m
 	t.fieldMap["pricechg24h"] = t.Pricechg24h
 	t.fieldMap["pricechg6h"] = t.Pricechg6h
+	t.fieldMap["pricechg1h"] = t.Pricechg1h
+	t.fieldMap["pricechg5m"] = t.Pricechg5m
 }
 
 func (t tTokenInfo) clone(db *gorm.DB) tTokenInfo {
