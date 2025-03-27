@@ -26,13 +26,13 @@ type TokenDetail struct {
 	Price             float64     `json:"price"`
 	Liquidity         float64     `json:"liquidity"`
 	CreationTime      string      `json:"creation_time"`
-	Volume            ValueChg    `json:"volume"`
-	PriceChg          ValueChg    `json:"pricechg"`
+	Volume            RotateVal   `json:"volume"`
+	PriceChg          RotateVal   `json:"pricechg"`
 	SocialInfos       SocialInfos `json:"social_infos"`
 	TopHolders        TopHolders  `json:"top_holders"`
 }
 
-type ValueChg struct {
+type RotateVal struct {
 	H24 float64 `json:"h24"`
 	H6  float64 `json:"h6"`
 	H1  float64 `json:"h1"`
