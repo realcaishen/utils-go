@@ -169,9 +169,9 @@ func (w *EvmRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 	}
 	totalSupply := new(big.Int).SetBytes(totalSupplyBytes)
 
-	if decimals.Cmp(common.Big0) <= 0 || len(symbol) == 0 {
-		return nil, fmt.Errorf("not found")
-	}
+	// if decimals.Cmp(common.Big0) < 0 || len(symbol) == 0 {
+	// 	return nil, fmt.Errorf("not found")
+	// }
 
 	ti := &loader.TokenInfo{
 		TokenName:    strings.TrimSpace(string(symbol)),
