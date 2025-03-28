@@ -7,9 +7,6 @@ import (
 
 	"github.com/realcaishen/utils-go/alert"
 	"github.com/realcaishen/utils-go/dal/model"
-	"github.com/realcaishen/utils-go/log"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
 )
 
 type TokenInfo = model.TTokenInfo
@@ -19,32 +16,19 @@ type TokenInfoManager struct {
 	chainNameTokenNames map[string]map[string]*TokenInfo
 	allTokens           []*TokenInfo
 	db                  *sql.DB
-	gdb                 *gorm.DB
 	alerter             alert.Alerter
 	mutex               *sync.RWMutex
 }
 
 func NewTokenInfoManager(db *sql.DB, alerter alert.Alerter) *TokenInfoManager {
 
-	gdb, err := gorm.Open(mysql.New(mysql.Config{
-		Conn: db,
-	}), &gorm.Config{})
-
-	if err != nil {
-		log.Fatal("Failed to initialize GORM:", err)
-	}
 	return &TokenInfoManager{
 		chainNameTokenAddrs: make(map[string]map[string]*TokenInfo),
 		chainNameTokenNames: make(map[string]map[string]*TokenInfo),
 		db:                  db,
-		gdb:                 gdb,
 		alerter:             alerter,
 		mutex:               &sync.RWMutex{},
 	}
-}
-
-func (mgr *TokenInfoManager) GetGdb(chainName string, tokenAddr string) *gorm.DB {
-	return mgr.gdb
 }
 
 func (mgr *TokenInfoManager) GetByChainNameTokenAddr(chainName string, tokenAddr string) (*TokenInfo, bool) {
