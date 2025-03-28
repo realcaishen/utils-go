@@ -139,14 +139,22 @@ func (w *EvmRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 		}
 	}
 
-	symbol, err := hexutil.Decode(symbolHex.String())
-	if err != nil {
+	symbolr, err := w.erc20ABI.Unpack("symbol", symbolHex)
+	if err != nil || len(symbolr) != 1 {
 		return nil, err
 	}
 
-	name, err := hexutil.Decode(nameHex.String())
-	if err != nil {
+	namer, err := w.erc20ABI.Unpack("name", nameHex)
+	if err != nil || len(namer) != 1 {
 		return nil, err
+	}
+	symbol, ok := symbolr[0].(string)
+	if !ok {
+		return nil, fmt.Errorf("symbol not string")
+	}
+	name, ok := namer[0].(string)
+	if !ok {
+		return nil, fmt.Errorf("name not string")
 	}
 
 	decimalsBytes, err := hexutil.Decode(decimalsHex.String())
