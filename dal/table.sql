@@ -14,6 +14,7 @@ CREATE TABLE `t_token_info` (
     `telegram` varchar(1024) NOT NULL DEFAULT '',
     `website` varchar(1024) NOT NULL DEFAULT '',
     `discord` varchar(1024) NOT NULL DEFAULT '',
+    `comment` varchar(2048) NOT NULL DEFAULT '',
     `mcap` DOUBLE NOT NULL DEFAULT 0,
     `fdv` DOUBLE NOT NULL DEFAULT 0,
     `volume24h` DOUBLE NOT NULL DEFAULT 0,

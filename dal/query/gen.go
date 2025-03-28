@@ -16,44 +16,74 @@ import (
 )
 
 var (
-	Q          = new(Query)
-	TObjectTag *tObjectTag
-	TTag       *tTag
-	TTokenInfo *tTokenInfo
+	Q                    = new(Query)
+	TChainInfo           *tChainInfo
+	TEventProcessedBlock *tEventProcessedBlock
+	TGappedBlock         *tGappedBlock
+	TKv                  *tKv
+	TNodeInfo            *tNodeInfo
+	TObjectTag           *tObjectTag
+	TTag                 *tTag
+	TTokenInfo           *tTokenInfo
+	TTransfer            *tTransfer
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
+	TChainInfo = &Q.TChainInfo
+	TEventProcessedBlock = &Q.TEventProcessedBlock
+	TGappedBlock = &Q.TGappedBlock
+	TKv = &Q.TKv
+	TNodeInfo = &Q.TNodeInfo
 	TObjectTag = &Q.TObjectTag
 	TTag = &Q.TTag
 	TTokenInfo = &Q.TTokenInfo
+	TTransfer = &Q.TTransfer
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:         db,
-		TObjectTag: newTObjectTag(db, opts...),
-		TTag:       newTTag(db, opts...),
-		TTokenInfo: newTTokenInfo(db, opts...),
+		db:                   db,
+		TChainInfo:           newTChainInfo(db, opts...),
+		TEventProcessedBlock: newTEventProcessedBlock(db, opts...),
+		TGappedBlock:         newTGappedBlock(db, opts...),
+		TKv:                  newTKv(db, opts...),
+		TNodeInfo:            newTNodeInfo(db, opts...),
+		TObjectTag:           newTObjectTag(db, opts...),
+		TTag:                 newTTag(db, opts...),
+		TTokenInfo:           newTTokenInfo(db, opts...),
+		TTransfer:            newTTransfer(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	TObjectTag tObjectTag
-	TTag       tTag
-	TTokenInfo tTokenInfo
+	TChainInfo           tChainInfo
+	TEventProcessedBlock tEventProcessedBlock
+	TGappedBlock         tGappedBlock
+	TKv                  tKv
+	TNodeInfo            tNodeInfo
+	TObjectTag           tObjectTag
+	TTag                 tTag
+	TTokenInfo           tTokenInfo
+	TTransfer            tTransfer
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:         db,
-		TObjectTag: q.TObjectTag.clone(db),
-		TTag:       q.TTag.clone(db),
-		TTokenInfo: q.TTokenInfo.clone(db),
+		db:                   db,
+		TChainInfo:           q.TChainInfo.clone(db),
+		TEventProcessedBlock: q.TEventProcessedBlock.clone(db),
+		TGappedBlock:         q.TGappedBlock.clone(db),
+		TKv:                  q.TKv.clone(db),
+		TNodeInfo:            q.TNodeInfo.clone(db),
+		TObjectTag:           q.TObjectTag.clone(db),
+		TTag:                 q.TTag.clone(db),
+		TTokenInfo:           q.TTokenInfo.clone(db),
+		TTransfer:            q.TTransfer.clone(db),
 	}
 }
 
@@ -67,24 +97,42 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:         db,
-		TObjectTag: q.TObjectTag.replaceDB(db),
-		TTag:       q.TTag.replaceDB(db),
-		TTokenInfo: q.TTokenInfo.replaceDB(db),
+		db:                   db,
+		TChainInfo:           q.TChainInfo.replaceDB(db),
+		TEventProcessedBlock: q.TEventProcessedBlock.replaceDB(db),
+		TGappedBlock:         q.TGappedBlock.replaceDB(db),
+		TKv:                  q.TKv.replaceDB(db),
+		TNodeInfo:            q.TNodeInfo.replaceDB(db),
+		TObjectTag:           q.TObjectTag.replaceDB(db),
+		TTag:                 q.TTag.replaceDB(db),
+		TTokenInfo:           q.TTokenInfo.replaceDB(db),
+		TTransfer:            q.TTransfer.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	TObjectTag ITObjectTagDo
-	TTag       ITTagDo
-	TTokenInfo ITTokenInfoDo
+	TChainInfo           ITChainInfoDo
+	TEventProcessedBlock ITEventProcessedBlockDo
+	TGappedBlock         ITGappedBlockDo
+	TKv                  ITKvDo
+	TNodeInfo            ITNodeInfoDo
+	TObjectTag           ITObjectTagDo
+	TTag                 ITTagDo
+	TTokenInfo           ITTokenInfoDo
+	TTransfer            ITTransferDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		TObjectTag: q.TObjectTag.WithContext(ctx),
-		TTag:       q.TTag.WithContext(ctx),
-		TTokenInfo: q.TTokenInfo.WithContext(ctx),
+		TChainInfo:           q.TChainInfo.WithContext(ctx),
+		TEventProcessedBlock: q.TEventProcessedBlock.WithContext(ctx),
+		TGappedBlock:         q.TGappedBlock.WithContext(ctx),
+		TKv:                  q.TKv.WithContext(ctx),
+		TNodeInfo:            q.TNodeInfo.WithContext(ctx),
+		TObjectTag:           q.TObjectTag.WithContext(ctx),
+		TTag:                 q.TTag.WithContext(ctx),
+		TTokenInfo:           q.TTokenInfo.WithContext(ctx),
+		TTransfer:            q.TTransfer.WithContext(ctx),
 	}
 }
 
