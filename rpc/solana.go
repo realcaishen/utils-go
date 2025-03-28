@@ -167,11 +167,11 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 	}
 
 	token := &loader.TokenInfo{
-		TokenName:    symbol,
+		TokenName:    strings.TrimSpace(symbol),
 		ChainName:    w.chainInfo.Name,
 		TokenAddress: tokenAddr,
 		Decimals:     int32(mintAccount.Decimals),
-		FullName:     fullName,
+		FullName:     strings.TrimSpace(fullName),
 		TotalSupply:  decimal.NewFromUint64(mintAccount.Supply),
 	}
 	w.tokenInfoMgr.AddTokenInfo(token)

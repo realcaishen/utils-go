@@ -77,11 +77,11 @@ func (w *SuiRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 	}
 
 	ti := &loader.TokenInfo{
-		TokenName:    rsp.Symbol,
+		TokenName:    strings.TrimSpace(rsp.Symbol),
 		ChainName:    w.chainInfo.Name,
 		TokenAddress: tokenAddr,
 		Decimals:     int32(rsp.Decimals),
-		FullName:     rsp.Name,
+		FullName:     strings.TrimSpace(rsp.Name),
 		Icon:         rsp.IconUrl,
 	}
 	w.tokenInfoMgr.AddTokenInfo(ti)

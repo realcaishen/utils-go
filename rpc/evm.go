@@ -166,11 +166,11 @@ func (w *EvmRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader.To
 	}
 
 	ti := &loader.TokenInfo{
-		TokenName:    string(symbol),
+		TokenName:    strings.TrimSpace(string(symbol)),
 		ChainName:    w.chainInfo.Name,
 		TokenAddress: tokenAddr,
 		Decimals:     int32(decimals.Uint64()),
-		FullName:     string(name),
+		FullName:     strings.TrimSpace(string(name)),
 		TotalSupply:  decimal.NewFromBigInt(totalSupply, 0),
 	}
 	w.tokenInfoMgr.AddTokenInfo(ti)
