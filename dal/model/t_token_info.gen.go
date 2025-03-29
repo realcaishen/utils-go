@@ -41,6 +41,7 @@ type TTokenInfo struct {
 	Pricechg5m        float64         `gorm:"column:pricechg5m;type:double;not null" json:"pricechg5m"`
 	Comment           string          `gorm:"column:comment;type:varchar(2048);not null" json:"comment"`
 	Price             float64         `gorm:"column:price;type:double;not null" json:"price"`
+	Liquidity         float64         `gorm:"column:liquidity;type:double;not null" json:"liquidity"`
 }
 
 // TableName TTokenInfo's table name

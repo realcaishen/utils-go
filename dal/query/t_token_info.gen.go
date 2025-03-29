@@ -54,6 +54,7 @@ func newTTokenInfo(db *gorm.DB, opts ...gen.DOOption) tTokenInfo {
 	_tTokenInfo.Pricechg5m = field.NewFloat64(tableName, "pricechg5m")
 	_tTokenInfo.Comment = field.NewString(tableName, "comment")
 	_tTokenInfo.Price = field.NewFloat64(tableName, "price")
+	_tTokenInfo.Liquidity = field.NewFloat64(tableName, "liquidity")
 
 	_tTokenInfo.fillFieldMap()
 
@@ -91,6 +92,7 @@ type tTokenInfo struct {
 	Pricechg5m        field.Float64
 	Comment           field.String
 	Price             field.Float64
+	Liquidity         field.Float64
 
 	fieldMap map[string]field.Expr
 }
@@ -134,6 +136,7 @@ func (t *tTokenInfo) updateTableName(table string) *tTokenInfo {
 	t.Pricechg5m = field.NewFloat64(table, "pricechg5m")
 	t.Comment = field.NewString(table, "comment")
 	t.Price = field.NewFloat64(table, "price")
+	t.Liquidity = field.NewFloat64(table, "liquidity")
 
 	t.fillFieldMap()
 
@@ -160,7 +163,7 @@ func (t *tTokenInfo) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (t *tTokenInfo) fillFieldMap() {
-	t.fieldMap = make(map[string]field.Expr, 27)
+	t.fieldMap = make(map[string]field.Expr, 28)
 	t.fieldMap["id"] = t.ID
 	t.fieldMap["update_timestamp"] = t.UpdateTimestamp
 	t.fieldMap["insert_timestamp"] = t.InsertTimestamp
@@ -188,6 +191,7 @@ func (t *tTokenInfo) fillFieldMap() {
 	t.fieldMap["pricechg5m"] = t.Pricechg5m
 	t.fieldMap["comment"] = t.Comment
 	t.fieldMap["price"] = t.Price
+	t.fieldMap["liquidity"] = t.Liquidity
 }
 
 func (t tTokenInfo) clone(db *gorm.DB) tTokenInfo {

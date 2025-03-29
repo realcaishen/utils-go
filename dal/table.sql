@@ -18,6 +18,7 @@ CREATE TABLE `t_token_info` (
     `mcap` DOUBLE NOT NULL DEFAULT 0,
     `fdv` DOUBLE NOT NULL DEFAULT 0,
     `price` DOUBLE NOT NULL DEFAULT 0,
+    `liquidity` DOUBLE NOT NULL DEFAULT 0,
     `volume24h` DOUBLE NOT NULL DEFAULT 0,
     `volume6h` DOUBLE NOT NULL DEFAULT 0,
     `volume1h` DOUBLE NOT NULL DEFAULT 0,
