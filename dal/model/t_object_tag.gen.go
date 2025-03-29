@@ -12,11 +12,11 @@ const TableNameTObjectTag = "t_object_tag"
 
 // TObjectTag mapped from table <t_object_tag>
 type TObjectTag struct {
-	ObjectTable     string    `gorm:"column:object_table;primaryKey" json:"object_table"`
-	ObjectID        int64     `gorm:"column:object_id;primaryKey" json:"object_id"`
-	TagID           int64     `gorm:"column:tag_id;primaryKey" json:"tag_id"`
-	UpdateTimestamp time.Time `gorm:"column:update_timestamp;not null;default:CURRENT_TIMESTAMP" json:"update_timestamp"`
-	InsertTimestamp time.Time `gorm:"column:insert_timestamp;not null;default:CURRENT_TIMESTAMP" json:"insert_timestamp"`
+	ObjectTable     string    `gorm:"column:object_table;type:varchar(64);primaryKey" json:"object_table"`
+	ObjectID        int64     `gorm:"column:object_id;type:bigint;primaryKey" json:"object_id"`
+	TagID           int64     `gorm:"column:tag_id;type:bigint;primaryKey" json:"tag_id"`
+	UpdateTimestamp time.Time `gorm:"column:update_timestamp;type:timestamp;not null;default:CURRENT_TIMESTAMP" json:"update_timestamp"`
+	InsertTimestamp time.Time `gorm:"column:insert_timestamp;type:timestamp;not null;default:CURRENT_TIMESTAMP" json:"insert_timestamp"`
 }
 
 // TableName TObjectTag's table name

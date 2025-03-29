@@ -8,8 +8,8 @@ const TableNameTKv = "t_kv"
 
 // TKv mapped from table <t_kv>
 type TKv struct {
-	Key   string `gorm:"column:key;primaryKey" json:"key"`
-	Value string `gorm:"column:value" json:"value"`
+	Key   string `gorm:"column:key;type:varchar(255);primaryKey" json:"key"`
+	Value string `gorm:"column:value;type:text" json:"value"`
 }
 
 // TableName TKv's table name

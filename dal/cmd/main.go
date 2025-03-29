@@ -26,6 +26,8 @@ func main() {
 		OutPath:      "../query",                                    // Path where the generated files will be stored
 		ModelPkgPath: "../model",                                    // Path where the model structs will be saved
 		Mode:         gen.WithDefaultQuery | gen.WithQueryInterface, // Generate QueryInterface (optional)
+		//FieldWithIndexTag: true,
+		FieldWithTypeTag: true,
 	})
 	dataMap := map[string]func(detailType gorm.ColumnType) (dataType string){
 		"decimal": func(detailType gorm.ColumnType) (dataType string) { return "decimal.Decimal" }, // 金额类型全部转换为第三方库,github.com/shopspring/decimal

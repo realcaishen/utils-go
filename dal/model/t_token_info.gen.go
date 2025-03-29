@@ -14,32 +14,32 @@ const TableNameTTokenInfo = "t_token_info"
 
 // TTokenInfo mapped from table <t_token_info>
 type TTokenInfo struct {
-	ID                int64           `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	UpdateTimestamp   time.Time       `gorm:"column:update_timestamp;not null;default:CURRENT_TIMESTAMP" json:"update_timestamp"`
-	InsertTimestamp   time.Time       `gorm:"column:insert_timestamp;not null;default:CURRENT_TIMESTAMP" json:"insert_timestamp"`
-	TokenName         string          `gorm:"column:token_name;not null" json:"token_name"`
-	ChainName         string          `gorm:"column:chain_name;not null" json:"chain_name"`
-	TokenAddress      string          `gorm:"column:token_address;not null" json:"token_address"`
-	Decimals          int32           `gorm:"column:decimals;not null" json:"decimals"`
-	FullName          string          `gorm:"column:full_name;not null" json:"full_name"`
-	TotalSupply       decimal.Decimal `gorm:"column:total_supply;not null;default:0" json:"total_supply"`
-	DiscoverTimestamp time.Time       `gorm:"column:discover_timestamp;not null;default:CURRENT_TIMESTAMP" json:"discover_timestamp"`
-	Icon              string          `gorm:"column:icon;not null" json:"icon"`
-	Twitter           string          `gorm:"column:twitter;not null" json:"twitter"`
-	Telegram          string          `gorm:"column:telegram;not null" json:"telegram"`
-	Website           string          `gorm:"column:website;not null" json:"website"`
-	Discord           string          `gorm:"column:discord;not null" json:"discord"`
-	Mcap              float64         `gorm:"column:mcap;not null" json:"mcap"`
-	Fdv               float64         `gorm:"column:fdv;not null" json:"fdv"`
-	Volume24h         float64         `gorm:"column:volume24h;not null" json:"volume24h"`
-	Volume6h          float64         `gorm:"column:volume6h;not null" json:"volume6h"`
-	Volume1h          float64         `gorm:"column:volume1h;not null" json:"volume1h"`
-	Volume5m          float64         `gorm:"column:volume5m;not null" json:"volume5m"`
-	Pricechg24h       float64         `gorm:"column:pricechg24h;not null" json:"pricechg24h"`
-	Pricechg6h        float64         `gorm:"column:pricechg6h;not null" json:"pricechg6h"`
-	Pricechg1h        float64         `gorm:"column:pricechg1h;not null" json:"pricechg1h"`
-	Pricechg5m        float64         `gorm:"column:pricechg5m;not null" json:"pricechg5m"`
-	Comment           string          `gorm:"column:comment;not null" json:"comment"`
+	ID                int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true" json:"id"`
+	UpdateTimestamp   time.Time       `gorm:"column:update_timestamp;type:timestamp;not null;default:CURRENT_TIMESTAMP" json:"update_timestamp"`
+	InsertTimestamp   time.Time       `gorm:"column:insert_timestamp;type:timestamp;not null;default:CURRENT_TIMESTAMP" json:"insert_timestamp"`
+	TokenName         string          `gorm:"column:token_name;type:varchar(128);not null" json:"token_name"`
+	ChainName         string          `gorm:"column:chain_name;type:varchar(64);not null" json:"chain_name"`
+	TokenAddress      string          `gorm:"column:token_address;type:varchar(128);not null" json:"token_address"`
+	Decimals          int32           `gorm:"column:decimals;type:int;not null" json:"decimals"`
+	FullName          string          `gorm:"column:full_name;type:varchar(128);not null" json:"full_name"`
+	TotalSupply       decimal.Decimal `gorm:"column:total_supply;type:decimal(64,0);not null;default:0" json:"total_supply"`
+	DiscoverTimestamp time.Time       `gorm:"column:discover_timestamp;type:timestamp;not null;default:CURRENT_TIMESTAMP" json:"discover_timestamp"`
+	Icon              string          `gorm:"column:icon;type:varchar(1024);not null" json:"icon"`
+	Twitter           string          `gorm:"column:twitter;type:varchar(1024);not null" json:"twitter"`
+	Telegram          string          `gorm:"column:telegram;type:varchar(1024);not null" json:"telegram"`
+	Website           string          `gorm:"column:website;type:varchar(1024);not null" json:"website"`
+	Discord           string          `gorm:"column:discord;type:varchar(1024);not null" json:"discord"`
+	Mcap              float64         `gorm:"column:mcap;type:double;not null" json:"mcap"`
+	Fdv               float64         `gorm:"column:fdv;type:double;not null" json:"fdv"`
+	Volume24h         float64         `gorm:"column:volume24h;type:double;not null" json:"volume24h"`
+	Volume6h          float64         `gorm:"column:volume6h;type:double;not null" json:"volume6h"`
+	Volume1h          float64         `gorm:"column:volume1h;type:double;not null" json:"volume1h"`
+	Volume5m          float64         `gorm:"column:volume5m;type:double;not null" json:"volume5m"`
+	Pricechg24h       float64         `gorm:"column:pricechg24h;type:double;not null" json:"pricechg24h"`
+	Pricechg6h        float64         `gorm:"column:pricechg6h;type:double;not null" json:"pricechg6h"`
+	Pricechg1h        float64         `gorm:"column:pricechg1h;type:double;not null" json:"pricechg1h"`
+	Pricechg5m        float64         `gorm:"column:pricechg5m;type:double;not null" json:"pricechg5m"`
+	Comment           string          `gorm:"column:comment;type:varchar(2048);not null" json:"comment"`
 }
 
 // TableName TTokenInfo's table name
