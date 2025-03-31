@@ -26,10 +26,16 @@ type TokenDetail struct {
 	Price             float64     `json:"price"`
 	Liquidity         float64     `json:"liquidity"`
 	CreationTime      string      `json:"creation_time"`
+	Tx                Tx          `json:"tx"`
 	Volume            RotateVal   `json:"volume"`
 	PriceChg          RotateVal   `json:"pricechg"`
 	SocialInfos       SocialInfos `json:"social_infos"`
 	TopHolders        TopHolders  `json:"top_holders"`
+}
+
+type Tx struct {
+	Buy  RotateVal `json:"buy"`
+	Sell RotateVal `json:"sell"`
 }
 
 type RotateVal struct {
