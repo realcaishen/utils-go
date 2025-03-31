@@ -27,6 +27,14 @@ CREATE TABLE `t_token_info` (
     `pricechg6h` DOUBLE NOT NULL DEFAULT 0,
     `pricechg1h` DOUBLE NOT NULL DEFAULT 0,
     `pricechg5m` DOUBLE NOT NULL DEFAULT 0,
+    `txbuy24h` int NOT NULL DEFAULT 0,
+    `txbuy6h` int NOT NULL DEFAULT 0,
+    `txbuy1h` int NOT NULL DEFAULT 0,
+    `txbuy5m` int NOT NULL DEFAULT 0,
+    `txsell24h` int NOT NULL DEFAULT 0,
+    `txsell6h` int NOT NULL DEFAULT 0,
+    `txsell1h` int NOT NULL DEFAULT 0,
+    `txsell5m` int NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_chain_name_token_address` (`chain_name`, `token_address`),
     KEY `idx_token_name` (`token_name`),
@@ -338,7 +346,12 @@ CREATE TABLE `t_lp_info` (
         `to_chain`,
         `maker_address`
     ),
-    UNIQUE KEY `uk_token_chain` (`version`, `token_name`, `from_chain`, `to_chain`)
+    UNIQUE KEY `uk_token_chain` (
+        `version`,
+        `token_name`,
+        `from_chain`,
+        `to_chain`
+    )
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE `t_maker_address_groups` (

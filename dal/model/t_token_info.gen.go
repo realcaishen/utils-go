@@ -42,6 +42,14 @@ type TTokenInfo struct {
 	Comment           string          `gorm:"column:comment;type:varchar(2048);not null" json:"comment"`
 	Price             float64         `gorm:"column:price;type:double;not null" json:"price"`
 	Liquidity         float64         `gorm:"column:liquidity;type:double;not null" json:"liquidity"`
+	Txbuy24h          int32           `gorm:"column:txbuy24h;type:int;not null" json:"txbuy24h"`
+	Txbuy6h           int32           `gorm:"column:txbuy6h;type:int;not null" json:"txbuy6h"`
+	Txbuy1h           int32           `gorm:"column:txbuy1h;type:int;not null" json:"txbuy1h"`
+	Txbuy5m           int32           `gorm:"column:txbuy5m;type:int;not null" json:"txbuy5m"`
+	Txsell24h         int32           `gorm:"column:txsell24h;type:int;not null" json:"txsell24h"`
+	Txsell6h          int32           `gorm:"column:txsell6h;type:int;not null" json:"txsell6h"`
+	Txsell1h          int32           `gorm:"column:txsell1h;type:int;not null" json:"txsell1h"`
+	Txsell5m          int32           `gorm:"column:txsell5m;type:int;not null" json:"txsell5m"`
 }
 
 // TableName TTokenInfo's table name
