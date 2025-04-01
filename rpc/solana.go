@@ -152,7 +152,6 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 	data := rsp.GetBinary()
 	decoder := bin.NewBorshDecoder(data)
 	err = mintAccount.UnmarshalWithDecoder(decoder)
-	freezable := !mintAccount.FreezeAuthority.IsZero()
 	if err != nil {
 		return nil, err
 	}
@@ -168,7 +167,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 	}
 
 	flag := 0
-	if freezable {
+	if mintAccount.FreezeAuthority != nil && !(mintAccount.FreezeAuthority.IsZero()) {
 		flag = 1
 	}
 	token := &loader.TokenInfo{
