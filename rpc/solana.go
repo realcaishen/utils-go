@@ -152,6 +152,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 	data := rsp.GetBinary()
 	decoder := bin.NewBorshDecoder(data)
 	err = mintAccount.UnmarshalWithDecoder(decoder)
+	freezable := !mintAccount.FreezeAuthority.IsZero()
 	if err != nil {
 		return nil, err
 	}
@@ -166,6 +167,10 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 		}
 	}
 
+	flag := 0
+	if freezable {
+		flag = 1
+	}
 	token := &loader.TokenInfo{
 		TokenName:    strings.TrimSpace(symbol),
 		ChainName:    w.chainInfo.Name,
@@ -173,6 +178,7 @@ func (w *SolanaRpc) GetTokenInfo(ctx context.Context, tokenAddr string) (*loader
 		Decimals:     int32(mintAccount.Decimals),
 		FullName:     strings.TrimSpace(fullName),
 		TotalSupply:  decimal.NewFromUint64(mintAccount.Supply),
+		Flags:        int32(flag),
 	}
 	w.tokenInfoMgr.AddTokenInfo(token)
 	return token, nil

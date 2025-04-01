@@ -63,6 +63,7 @@ func newTTokenInfo(db *gorm.DB, opts ...gen.DOOption) tTokenInfo {
 	_tTokenInfo.Txsell6h = field.NewInt32(tableName, "txsell6h")
 	_tTokenInfo.Txsell1h = field.NewInt32(tableName, "txsell1h")
 	_tTokenInfo.Txsell5m = field.NewInt32(tableName, "txsell5m")
+	_tTokenInfo.Flags = field.NewInt32(tableName, "flags")
 
 	_tTokenInfo.fillFieldMap()
 
@@ -109,6 +110,7 @@ type tTokenInfo struct {
 	Txsell6h          field.Int32
 	Txsell1h          field.Int32
 	Txsell5m          field.Int32
+	Flags             field.Int32
 
 	fieldMap map[string]field.Expr
 }
@@ -161,6 +163,7 @@ func (t *tTokenInfo) updateTableName(table string) *tTokenInfo {
 	t.Txsell6h = field.NewInt32(table, "txsell6h")
 	t.Txsell1h = field.NewInt32(table, "txsell1h")
 	t.Txsell5m = field.NewInt32(table, "txsell5m")
+	t.Flags = field.NewInt32(table, "flags")
 
 	t.fillFieldMap()
 
@@ -187,7 +190,7 @@ func (t *tTokenInfo) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (t *tTokenInfo) fillFieldMap() {
-	t.fieldMap = make(map[string]field.Expr, 36)
+	t.fieldMap = make(map[string]field.Expr, 37)
 	t.fieldMap["id"] = t.ID
 	t.fieldMap["update_timestamp"] = t.UpdateTimestamp
 	t.fieldMap["insert_timestamp"] = t.InsertTimestamp
@@ -224,6 +227,7 @@ func (t *tTokenInfo) fillFieldMap() {
 	t.fieldMap["txsell6h"] = t.Txsell6h
 	t.fieldMap["txsell1h"] = t.Txsell1h
 	t.fieldMap["txsell5m"] = t.Txsell5m
+	t.fieldMap["flags"] = t.Flags
 }
 
 func (t tTokenInfo) clone(db *gorm.DB) tTokenInfo {

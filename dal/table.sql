@@ -35,6 +35,7 @@ CREATE TABLE `t_token_info` (
     `txsell6h` int NOT NULL DEFAULT 0,
     `txsell1h` int NOT NULL DEFAULT 0,
     `txsell5m` int NOT NULL DEFAULT 0,
+    `flags` int NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_chain_name_token_address` (`chain_name`, `token_address`),
     KEY `idx_token_name` (`token_name`),

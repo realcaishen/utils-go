@@ -50,6 +50,7 @@ type TTokenInfo struct {
 	Txsell6h          int32           `gorm:"column:txsell6h;type:int;not null" json:"txsell6h"`
 	Txsell1h          int32           `gorm:"column:txsell1h;type:int;not null" json:"txsell1h"`
 	Txsell5m          int32           `gorm:"column:txsell5m;type:int;not null" json:"txsell5m"`
+	Flags             int32           `gorm:"column:flags;type:int;not null" json:"flags"`
 }
 
 // TableName TTokenInfo's table name
