@@ -7,15 +7,26 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/realcaishen/utils-go/alert"
+	"github.com/owlto-dao/utils-go/alert"
 )
 
 type CircleCctpChain struct {
-	ChainId            int32
-	MinValue           string
-	Domain             int32
-	TokenMessenger     string
-	MessageTransmitter string
+	ChainId              int32
+	MinValue             string
+	Domain               int32
+	TokenMessenger       string
+	MessageTransmitter   string
+	TokenMessengerV2     string
+	MessageTransmitterV2 string
+}
+
+func (ccc *CircleCctpChain) GetCctpVersion(dst *CircleCctpChain) int {
+	if dst.TokenMessenger != "" && ccc.TokenMessenger != "" {
+		return 1
+	} else if dst.TokenMessengerV2 != "" && ccc.TokenMessengerV2 != "" {
+		return 2
+	}
+	return 0
 }
 
 func (ccc *CircleCctpChain) GetMinValueUnit() *big.Int {
@@ -68,7 +79,7 @@ func (mgr *CircleCctpChainManager) GetChainIds() []int32 {
 
 func (mgr *CircleCctpChainManager) LoadAllChains() {
 	// Query the database to select only id and name fields
-	rows, err := mgr.db.Query("SELECT chainid, min_value, domain, token_messenger, message_transmitter FROM t_cctp_support_chain")
+	rows, err := mgr.db.Query("SELECT chainid, min_value, domain, token_messenger, message_transmitter, token_messengerv2, message_transmitterv2 FROM t_cctp_support_chain")
 
 	if err != nil || rows == nil {
 		mgr.alerter.AlertText("select t_cctp_support_chain error", err)
@@ -83,7 +94,7 @@ func (mgr *CircleCctpChainManager) LoadAllChains() {
 	// Iterate over the result set
 	for rows.Next() {
 		var chain CircleCctpChain
-		if err := rows.Scan(&chain.ChainId, &chain.MinValue, &chain.Domain, &chain.TokenMessenger, &chain.MessageTransmitter); err != nil {
+		if err := rows.Scan(&chain.ChainId, &chain.MinValue, &chain.Domain, &chain.TokenMessenger, &chain.MessageTransmitter, &chain.TokenMessengerV2, &chain.MessageTransmitterV2); err != nil {
 			mgr.alerter.AlertText("scan t_cctp_support_chain row error", err)
 		} else {
 			chain.MessageTransmitter = strings.TrimSpace(chain.MessageTransmitter)
